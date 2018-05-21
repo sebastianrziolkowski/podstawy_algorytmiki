@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1526931680 source:d:\cpp\podstawy_algorytmiki\main.cpp
+	<iostream>
+	<stdlib.h>
+	<stack>
+
