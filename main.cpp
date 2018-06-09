@@ -93,7 +93,7 @@ void AverageMilkiness(TStado stado)
     {
         sum=sum+stado.stado[i].mlecznosc;
     }
-    cout<<"Œrednia mlecznoœæ w stadzie:"<<sum/stado.n<<endl;
+    cout<<"Srednia mlecznosc w stadzie:"<<sum/stado.n<<endl;
 }
 
 void Calves(TStado stado)
@@ -112,13 +112,16 @@ void SupremeMilkiness(TStado stado)
 {
     stack <int> index;
     TKrowa krowa = stado.stado[0];
+    index.push(0);
 
     for(int i=1;i<stado.n;i++)
     {
         if(stado.stado[i].mlecznosc>krowa.mlecznosc)
         {
             while(!index.empty())
-            index.pop();
+                {
+                    index.pop();
+                }
             index.push(i);
             krowa=stado.stado[i];
         }
@@ -127,12 +130,42 @@ void SupremeMilkiness(TStado stado)
             index.push(i);
         }
     }
-    for(int i=0;i<index.size();i++)
+    while(!index.empty())
     {
-        cout<<"Rozmiar stosu"<<index.size()<<endl;
         int p = index.top();
         index.pop();
-        cout<<"Najbardziej mleczna krowa to "<<stado.stado[p].imie <<" która daje "<< stado.stado[p].mlecznosc <<" mleka i ma "<< stado.stado[p].wiek << " lat."<<endl;
+        cout<<"Najbardziej mleczna krowa to "<<stado.stado[p].imie <<" ktora daje "<< stado.stado[p].mlecznosc <<" mleka i ma "<< stado.stado[p].wiek << " lat."<<endl;
+    }
+}
+
+
+void Youngest(TStado stado)
+{
+    stack <int> index;
+    TKrowa krowa = stado.stado[0];
+    index.push(0);
+
+    for(int i=1;i<stado.n;i++)
+    {
+        if(stado.stado[i].wiek<krowa.wiek)
+        {
+            while(!index.empty())
+                {
+                    index.pop();
+                }
+            index.push(i);
+            krowa=stado.stado[i];
+        }
+        else if(stado.stado[i].wiek==krowa.wiek)
+        {
+            index.push(i);
+        }
+    }
+    while(!index.empty())
+    {
+        int p = index.top();
+        index.pop();
+        cout<<"Najmlodsza krowa to "<<stado.stado[p].imie <<" ktora daje "<< stado.stado[p].mlecznosc <<" mleka i ma "<< stado.stado[p].wiek << " lat."<<endl;
     }
 }
 
@@ -180,6 +213,58 @@ void MilkinessHigherThan(TStado stado, double milkness)
     cout<<sum<< " ilosc krow dajacych wiecej mleka niz " << milkness<<endl;
 }
 
+
+//ZAD_10
+
+int HEX(int n)
+{
+        if(n>0)
+     {
+         HEX(n/16);
+         if(n%16>9)
+            switch(n%16)
+            {
+               case 10:
+                  cout<<"A"; break;
+               case 11:
+                  cout<<"B"; break;
+               case 12:
+                  cout<<"C"; break;
+               case 13:
+                  cout<<"D"; break;
+               case 14:
+                  cout<<"E"; break;
+               case 15:
+                  cout<<"F"; break;
+            }
+         else
+               cout << n%16;
+     }
+}
+
+
+//ZAD_11
+int wyswietl(int n, int p)
+{
+    if(p>0 && p<11)
+    {
+        if(n>0)
+     {
+        wyswietl(n/p,p);
+        cout << n%p;
+     }
+    }
+    else cout<<"Wrong second input"<<endl; return 0;
+}
+
+//ZAD_13
+int zad_13(int n)
+{
+    if(n==0) return 2;
+    if(n==1) return 1;
+    if(n>=2) return (2/(2+zad_13(n-1)*zad_13(n-2)));
+}
+
 int main()
 {
     //ZAD_5
@@ -189,12 +274,26 @@ int main()
     */
 
     //ZAD_6
-    TStado stado = SetStado();
-    AverageMilkiness(stado);
-    Calves(stado);
-    SupremeMilkiness(stado);
-    MAsFirstLetter(stado);
-    MilkinessHigherThan(stado, GetMilkness());
+    //TStado stado = SetStado();
+    //AverageMilkiness(stado);
+    //Calves(stado);
+    //SupremeMilkiness(stado);
+    //MAsFirstLetter(stado);
+    //MilkinessHigherThan(stado, GetMilkness());
+    //Youngest(stado);
 
+
+    //ZAD_10
+//    HEX(50000);
+
+    //ZAD_11
+// wyswietl(100,5);
+    //ZAD_13
+//      cout<<"Zad 13: "<< zad_13(10)<<endl;
+
+    //PLIKI
+    //ZAD_3
+    //ZAD_7
+    //ZAD_9
     return 0;
 }

@@ -1,22 +1,11 @@
-5
-
-Mrowa1
-1
-10
-
-Krowa2
-2
-9
-
-Mrowa3
-1
-10
-
-Mrowa4
-5
-5
-
-Krowa5
-10
-1
-5
+dec	trojkowy		czworkowy   
+1	1		
+2	2
+3	10
+4	11
+5	12
+6	100
+7	101
+8	102
+9	110
+10 	111
