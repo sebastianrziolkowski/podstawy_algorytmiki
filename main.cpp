@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stack>
+#include <fstream>
 
 using namespace std;
 
@@ -265,35 +266,144 @@ int zad_13(int n)
     if(n>=2) return (2/(2+zad_13(n-1)*zad_13(n-2)));
 }
 
+bool average(string fileName)
+{
+    ifstream file;
+    file.open(fileName.c_str());
+    if(!file.good())
+        return false;
+    int even=0, odd=0, number;
+    while(file.good())
+    {
+        file>>number;
+        if(number%2==0)
+            even+=number;
+        else odd+=number;
+    }
+    cout<<"Even: "<<even<<" Odd: "<<odd<<endl;
+}
+
+int zad_7(string fileName)
+{
+    int counter=0;
+    string text,temp;
+    ifstream file;
+    file.open(fileName.c_str());
+
+    while (!file.eof())
+    {
+        getline (file, temp);
+        text.append (temp);
+    }
+
+    for(int i=0;i<text.size();i++)
+    {
+        if(text[i]=='!' && text[i+1]=='=')
+            counter++;
+    }
+    return counter;
+}
+
+
+//ZAD_9
+
+void zad_9(string fileName)
+{
+    int caseCounter[26];
+    int HcaseCounter[26];
+    for(int i=0;i<26;i++){
+        caseCounter[i]=0;
+        HcaseCounter[i]=0;
+    }
+    int spaces=0;
+    int numbers=0;
+    int counter=0;
+    int lowerCase=0;
+    int highCase=0;
+    string text,temp;
+    ifstream file;
+    file.open(fileName.c_str());
+
+    while (!file.eof())
+      {
+        getline (file, temp);
+        text.append (temp);
+      }
+    cout<<"Size: "<<text.size()<<endl;
+
+    for(int i=0;i<text.size();i++)
+    {
+        if(text[i]>96 && text[i]<123)
+        {
+            lowerCase++;
+            caseCounter[(text[i]-97)]++;
+        }
+
+        if(text[i]>64 && text[i]<91)
+        {
+            highCase++;
+            HcaseCounter[(text[i]-65)]++;
+        }
+
+        if(text[i]>47 && text[i]<59)
+        {
+            numbers++;
+        }
+        if(text[i]==32)
+            spaces++;
+
+    }
+
+    cout<<"Lower case: "<<lowerCase<<endl<<endl;
+    for(int i=0;i<26;i++)
+    {
+        cout<<char(i+97)<<": "<<caseCounter[i]<<endl;
+    }
+    cout<<endl<<endl;
+    for(int i=0;i<26;i++)
+    {
+        cout<<char(i+65)<<": "<<HcaseCounter[i]<<endl<<endl;
+    }
+    cout<<"Letter: "<<highCase+lowerCase<<endl<<endl;
+    cout<<"Numbers: "<<numbers<<endl<<endl;
+    cout<<"Spaces: "<<spaces<<endl<<endl;
+}
+
+
 int main()
 {
     //ZAD_5
-    /*
+
     TKlient klient = SetData();
     GetData(klient);
-    */
 
     //ZAD_6
-    //TStado stado = SetStado();
-    //AverageMilkiness(stado);
-    //Calves(stado);
-    //SupremeMilkiness(stado);
-    //MAsFirstLetter(stado);
-    //MilkinessHigherThan(stado, GetMilkness());
-    //Youngest(stado);
+    TStado stado = SetStado();
+    AverageMilkiness(stado);
+    Calves(stado);
+    SupremeMilkiness(stado);
+    MAsFirstLetter(stado);
+    MilkinessHigherThan(stado, GetMilkness());
+    Youngest(stado);
 
 
     //ZAD_10
-//    HEX(50000);
+    cout<<endl;
+    HEX(50000);
 
     //ZAD_11
-// wyswietl(100,5);
+    wyswietl(100,5);
     //ZAD_13
-//      cout<<"Zad 13: "<< zad_13(10)<<endl;
+    cout<<"Zad 13: "<< zad_13(10)<<endl;
 
     //PLIKI
     //ZAD_3
+    average("liczbyC.txt");
     //ZAD_7
+    cout<<zad_7("test_7.txt")<<endl;
     //ZAD_9
+    string fileName;
+    cout<<"Podaj nazwe pliku do zad_9->pliki: "; cin>>fileName; cout<<endl;
+    zad_9(fileName+".txt");
     return 0;
 }
